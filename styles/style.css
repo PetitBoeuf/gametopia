@@ -1,0 +1,105 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato:800");
+*{
+    margin : 0;
+    padding : 0;
+    font-family: 'Raleway';
+    /*font-weight: bold;*/
+    text-decoration: none;
+    list-style : none;
+    
+}
+
+header p{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+header p.MainTitle{
+    font-size: 5rem;
+}
+
+main p.MainMessage{
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+div.ImageCarroussel{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    
+}
+
+div.ImageCarroussel img.leftarrow,img.rightarrow{
+    margin: 1rem;
+}
+
+div.ImageCarroussel img.leftarrow{
+    margin-right: auto;    
+}
+div.ImageCarroussel img.rightarrow{
+    margin-left: auto;    
+}
+
+div.ImageCarroussel > img#centeredOne{
+    margin: 3rem 6rem;
+    height: 500px;
+    width: 700px;
+}
+
+/* lson left side of carroussel, rsoc...*/
+div.ImageCarroussel img.lsoc, img.rsoc{
+    opacity: 0.3;
+}
+/*
+div.ImageCarroussel img.lsoc:hover, img.rsoc:hover{
+    box-shadow: 50px 40px -10px rgba(182, 5, 5, 0.57);
+}
+*/
+
+footer{
+    position: relative;
+    display:flex;
+    flex-direction:row;    
+    width: 100%;
+    margin-top: 3rem;
+}
+footer button{
+    font-size: 1.5rem;
+}
+footer button.CopyrightButton{    
+    margin-left: auto;
+    margin-right: 0.5rem;
+}
+footer button.PlayButton{    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+footer button {
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: solid black;
+    transition: all 0.4s ease 0s;
+}
+
+footer button:hover {
+    background: #a0a0a0;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+

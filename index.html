@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gametopia</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="js/myscript.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <p class="MainTitle">Gametopia</p>
+        <p class="PageTitle">Accueil</p>
+    </header>
+
+    <main>
+        <p class="MainMessage">Sélectionnez un jeu! </p>
+
+        <div class="ImageCarroussel">
+
+            <img class="leftarrow"src="assets/flechegauche.png" alt="Basculer vers la gauche" width="5%" onClick="ScrollLeft()">
+
+            <img class="carroussel lsoc" src="assets/imageTest1.png" alt="https://media.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.gif" width="15%" height="15%">
+            <img id="centeredOne" class="carroussel" src="assets/imageTest2.png" onmouseover="AnimateMe()" onmouseout="DeanimateMe()" alt="https://media.giphy.com/media/JVGLHEuzbVviw/giphy.gif" width="35%" height="35%">
+            <img class="carroussel rsoc" src="assets/imageTest3.png" alt="https://media.giphy.com/media/iFDtBQ0fC0DPCdiPBA/giphy.gif" width="15%" height="15%">
+            
+            <img class="rightarrow" src="assets/flechedroite.png" alt="Basculer vers la gauche" width="5%" onClick="ScrollRight()">
+            
+        </div>
+
+        
+    </main>
+    
+    <footer>
+        <button class="PlayButton">Je veux jouer à celui-ci! 🎮 </button>
+        <button class="CopyrightButton">Droits & Crédits ©️</button>
+    </footer>
+
+</body>
+</html>
