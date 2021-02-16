@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Lato:800");
 *{
+    background-color: #a0a0a0;
     margin : 0;
     padding : 0;
     font-family: 'Raleway';
@@ -54,12 +55,12 @@ div.ImageCarroussel > img#centeredOne{
     width: 700px;
 }
 
-/* lson left side of carroussel, rsoc...*/
-div.ImageCarroussel img.lsoc, img.rsoc{
+/* fioc first image of carroussel, tioc third...*/
+div.ImageCarroussel img.fioc, img.tioc{
     opacity: 0.3;
 }
 /*
-div.ImageCarroussel img.lsoc:hover, img.rsoc:hover{
+div.ImageCarroussel img.fioc:hover, img.tioc:hover{
     box-shadow: 50px 40px -10px rgba(182, 5, 5, 0.57);
 }
 */
