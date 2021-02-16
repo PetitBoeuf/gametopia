@@ -16,7 +16,7 @@ function DeanimateMe(){
     centeredImage.src = tempAlt;
 }
 
-function ScrollLeft(){
+function ScrollRight(){
     fioc = document.querySelector(".fioc");
     sioc = document.querySelector(".sioc");
     tioc = document.querySelector(".tioc");
@@ -28,7 +28,7 @@ function ScrollLeft(){
     indexGame + 1 == nbGames ? indexGame = 0 : indexGame += 1;
 }
 
-function ScrollRight(){
+function ScrollLeft(){
     fioc = document.querySelector(".fioc");
     sioc = document.querySelector(".sioc");
     tioc = document.querySelector(".tioc");
