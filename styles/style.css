@@ -11,7 +11,9 @@
 
     /*cursor: url('assets/c1.png'), default;*/   
 }
-
+a{
+    color: black;
+}
 body{
     position: absolute;
     z-index: 20;
@@ -21,7 +23,10 @@ body{
     z-index: -10;    
     top: 0;
 }
-header p{
+header{
+    width: 100%;
+}
+header p{    
     display: flex;
     justify-content: center;
     font-weight: bold;
@@ -30,6 +35,11 @@ header p{
 header p.MainTitle{
     font-size: 5rem;
 }
+header p.PageTitle{
+    margin-top: 1rem;
+}
+    
+
 
 main p.MainMessage{
     display: flex;
@@ -68,11 +78,23 @@ div.ImageCarroussel > img#centeredOne{
 div.ImageCarroussel img.fioc, img.tioc{
     opacity: 0.3;
 }
-/*
-div.ImageCarroussel img.fioc:hover, img.tioc:hover{
-    box-shadow: 50px 40px -10px rgba(182, 5, 5, 0.57);
+
+div.CopyrightBlock p{
+    font-size: 1.5rem;
+    margin: 2.5rem;
 }
-*/
+
+main.MainCopyright{
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+    margin-top: 7rem; 
+}
+main.MainCopyright h1{
+    margin-left: 1rem;
+}
+
+
 
 footer{
     position: relative;
@@ -85,12 +107,19 @@ footer button{
     font-size: 1.5rem;
 }
 footer button.CopyrightButton{    
-    margin-left: auto;
-    margin-right: 0.5rem;
+    position: absolute;
+    left: 100%;
+    transform: translateX(-110%);
 }
 footer button.PlayButton{    
     position: absolute;
     left: 50%;
+    transform: translateX(-50%);
+}
+footer button.BackToMenuButton{    
+    position: absolute;
+    left: 50%;
+    margin-top: 5rem;
     transform: translateX(-50%);
 }
 
@@ -106,6 +135,7 @@ footer button {
 }
 
 footer button:hover {
+    cursor: pointer;
     background: #a0a0a0;
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
