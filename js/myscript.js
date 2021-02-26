@@ -52,6 +52,18 @@ function Select1P(){
     p2button = document.querySelectorAll(".GameMode")[1];
     
 }
+
+var PlayersButtons = document.querySelectorAll(".GameMode");
+
+PlayersButtons[0].addEventListener('click', () => {
+    PlayersButtons[0].innerHTML = "<b>Joueur contre Joueur</b>";
+    PlayersButtons[1].innerHTML = "Joueur contre Ordinateur";
+});
+PlayersButtons[1].addEventListener('click', () => {
+    PlayersButtons[0].innerHTML = "Joueur contre Joueur";
+    PlayersButtons[1].innerHTML = "<b>Joueur contre Ordinateur</b>";
+});
+
 /*
 1."https://media.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.gif"
 2."https://media.giphy.com/media/JVGLHEuzbVviw/giphy.gif"
