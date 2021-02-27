@@ -10,8 +10,8 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/c7.png" />
 
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script> 
-        <script src="js/myscript.js"></script>
-        <script src="js/background.js"></script>
+        <script src="js/myscript.js" defer></script>
+        <script src="js/background.js" defer></script>
 
 
     </head>
@@ -54,7 +54,7 @@
         <footer>
             <a href="index.html"><button class="">Changer de jeu</button></a>
             <a href="letsplay.html"><button class="CenteredSettingsButton">Lancer la partie</button></a>
-            <a href="rules.html"><button class="">Comment jouer ? </button></a>
+            <button class="GetRules" onclick="GetRulesPreGame()">Comment jouer ? </button>
         </footer>
 
     </body>

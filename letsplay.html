@@ -9,9 +9,10 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="assets/c7.png" />
 
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script> 
-        <script src="js/myscript.js"></script>
-        <script src="js/background.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" defer></script> 
+        <script src="js/myscript.js" defer></script>
+        <script src="js/background.js" defer></script>
+        <script src="js/game.js" defer></script>
 
 
     </head>
@@ -19,15 +20,15 @@
 
         <header>
             <p class="MainTitle">Wola j'en sais rien</p>
-            <p class="PageTitle">Accueil</p>
+            <p class="PageTitle">Voici le {jeu}!</p>
         </header>
         
         <main>
-
+            <canvas id="GameCanvas"></canvas>
         </main>
 
         <footer>
-
+            <button class="GetRules" onclick="GetRulesInGame()">Comment jouer ? </button>
         </footer>
 
     </body>

@@ -9,9 +9,9 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="assets/c7.png" />
 
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script> 
-        <script src="js/myscript.js"></script>
-        <script src="js/background.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" defer></script> 
+        <script src="js/myscript.js" defer></script>
+        <script src="js/background.js" defer></script>
 
 
     </head>
@@ -19,15 +19,23 @@
 
         <header>
             <p class="MainTitle">Wola j'en sais rien</p>
-            <p class="PageTitle">Accueil</p>
+            <p class="PageTitle">Règles et commandes</p>
         </header>
         
-        <main>
-
+        <p class="MainMessage"><em> Essayez de respecter les règles et les commandes du jeu pour éviter de faire n'importe quoi s'il vous plaît.. </em></p>
+        <main class="MainRules">
+            <div class="RulesBlock">
+                <h1 class="RulesBlockTitle">Règles du jeu : </h1>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur id accusamus quo consequuntur illo voluptatibus eveniet consequatur eos doloribus laborum, ratione hic cum dolores suscipit dolorem nesciunt maiores ad nostrum?</p>                
+            </div>
+            <div class="RulesBlock">
+                <h1 class="RulesBlockTitle">Commandes : </h1>                
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, assumenda maxime sed dolor consectetur numquam, maiores veniam possimus corrupti architecto vitae, odio quibusdam repellendus molestias distinctio excepturi tenetur atque ratione!</p>
+            </div>
         </main>
 
         <footer>
-
+            <button class="GetBackButton">Revenir à l'accueil</button>
         </footer>
 
     </body>

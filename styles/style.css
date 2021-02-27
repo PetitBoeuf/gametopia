@@ -98,6 +98,10 @@ main.MainCopyright{
 main.MainCopyright h1{
     margin-left: 1rem;
 }
+main canvas#GameCanvas{
+    height: 500px;
+    width: 1000px;
+}
 
 
 div.SettingBlock{
