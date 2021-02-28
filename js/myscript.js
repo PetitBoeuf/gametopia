@@ -77,21 +77,23 @@ window.addEventListener("load", function(){
     });
 
     function GetRulesPreGame(){
-        window.location = "rules.html";
-        console.log("hello there");
-        document.cookie = "buttonText=Revenir aux paramètres;buttonAttribute=GetBackSettings()";
+        document.cookie = "buttonText=Revenir aux paramètres"
+        document.cookie = "buttonAttribute=GetBackSettings()";
+        window.location = "rules.html";        
     }
     
     function GetRulesInGame(){
+        document.cookie = "buttonText=Revenir à la partie en cours"
+        document.cookie="buttonAttribute=GetBackInGame()";
         window.location = "rules.html";
-        document.cookie = "buttonText=Revenir à la partie en cours;buttonAttribute=GetBackInGame()";
     }
-
+    console.log("hello");
     buttonText = document.cookie.split(";")[0].split("=")[1];
     buttonAttribute = document.cookie.split(";")[1].split("=")[1];
-    rulesButton = document.querySelector(".GetRules");
+    rulesButton = document.querySelector(".GetBackButton");
     rulesButton.innerHTML = buttonText;
     rulesButton.setAttribute("onclick","javascript: " + buttonAttribute);
+    console.log("hello");
 
     function GetBackSettings(){        
         window.location = "settings.html";
