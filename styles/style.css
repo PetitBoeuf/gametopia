@@ -110,6 +110,7 @@ main.MainCopyright h1{
     margin-left: 1rem;
 }
 main canvas#GameCanvas{
+    position: absolute;
     height: 500px;
     width: 1000px;
 }

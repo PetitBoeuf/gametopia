@@ -20,6 +20,7 @@ function setup(){
         gameCanvas = createGraphics(500,600);
         gameCanvas.parent("#GameCanvas");
         letsplay = true;
+        image(gameCanvas,0,0);
     }
     //bgCanvas.class('background');
     //console.log(controllers);
@@ -39,5 +40,5 @@ function draw(){
 }
 
 function drawGameCanvas(){
-    gameCanvas.background(0,0,0);
+    gameCanvas.background(0);
 }
