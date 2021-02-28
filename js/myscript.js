@@ -1,7 +1,7 @@
 var imageOnMouse;
 var fioc,sioc,tioc;
 var tempScrollAlt, tempScrollSrc;
-var games = ["Langue", "Prank", "Kiki"], indexGame = 1, nbGames = 3; 
+var games = ["Langue", "Kiki", "Prank"], indexGame = 1, nbGames = 3; 
 var p1button, p2button, backbutton, rulesButton;
 var buttonText, buttonAttribute;
 var mySessionStorage = window.sessionStorage;
