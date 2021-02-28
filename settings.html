@@ -32,19 +32,21 @@
             </div>
             <div class="SettingBlock">
                 <p class="SettingMode">Sélectionnez le mode : </p>
-                <button class="GameMode">Joueur contre Joueur</button>
                 <button class="GameMode">Joueur contre Ordinateur</button>
+                <button class="GameMode">Joueur contre Joueur</button>
             </div>
             
-            <div class="SettingBlock">
-                <p class="SettingMode">Définissez vos pseudos : </p>
+            <div class="SettingBlock NickNameBlock">
+                <p class="SettingMode NickNameTitle">Définissez le(s) pseudo(s) : </p>
                 <div class="PNameDiv">
                     <span class="P1NameText">Pseudo Joueur 1 :</span>
                     <input type="text" class="P1Name" size="30" placeholder="Insérez ici votre pseudo" style="font-size: 1.5rem; height: 3rem;"></input>
+                    <span class="ErrorTag">Ne laissez pas un pseudo vide enfin!</span>
                 </div>
-                <div class="PNameDiv">
+                <div class="PNameDiv SecondPlayerDiv">
                     <span class="P2NameText">Pseudo Joueur 2 :</span>
                     <input type="text" class="P2Name" size="30" placeholder="Insérez ici votre pseudo" style="font-size: 1.5rem; height: 3rem;"></input>
+                    <span class="ErrorTag">Ne laissez pas un pseudo vide enfin!</span>
                 </div>
             </div>
             
@@ -52,7 +54,7 @@
 
         <footer>
             <a href="index.html"><button class="">Changer de jeu</button></a>
-            <a href="letsplay.html"><button class="CenteredButton">Lancer la partie</button></a>
+            <button class="CenteredButton StartGameButton" onclick="CheckAndPlay()">Lancer la partie</button>
             <button class="GetRules" onclick="GetRulesPreGame()">Comment jouer ? </button>
         </footer>
 

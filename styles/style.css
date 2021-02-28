@@ -42,7 +42,7 @@ header p{
 header p.MainTitle{
     font-size: 5rem;
 }
-header p.PageTitle{
+header p.PageTitle, p.MainGameTitle, p.MainRulesTitle{
     margin-top: 1rem;
 }
     
@@ -123,7 +123,11 @@ main div.FalseCanvas{
     height: 40rem;
     background-color: black;
 }
-
+.OpposingDoods{
+    text-align: center;
+    font-style: italic;
+    margin : 1rem 0rem;
+}
 
 div.SettingBlock{
     display: flex;
@@ -147,10 +151,25 @@ div.PNameDiv{
 div.PNameDiv input{
     margin: -1rem 1.5rem;
 }
+div.SecondPlayerDiv{
+    display: none;
+}
 img.GameOverview{
     height: 15rem;
     width: 20rem;
 }
+
+span.ErrorTag{
+    display: none;
+    font-size: 1.5rem;
+    color: red;
+    font-style: italic;
+}
+
+button.StartGameButton{
+    display: none;
+}
+
 
 /*
 canvas#GameCanvas{
@@ -208,7 +227,21 @@ footer button.BackToMenuButton{
     left: 50%;
     transform: translateX(-50%);
 }
-footer button.GetRules{
-    
-}
 
+
+button.ReadyToStart{
+    border: solid red;
+    /*animation: flashing 2s linear infinite;*/
+}
+button.ReadyToStart:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 5px 40px -20px rgba(196, 34, 34, 0.70);
+    animation: flashing 2s linear infinite;
+}
+@keyframes flashing{
+    50%{
+        opacity: 0%;
+    }
+
+}
