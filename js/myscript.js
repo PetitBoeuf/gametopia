@@ -1,14 +1,3 @@
-/*
-window.addEventListener("load", function(){
-
-//Définir tous les document.querySelector et redéfinir tous les onclick par un addeventlistener avec le click sur chaque bouton, un enfer
-
-});
-
-*/
-
-
-
 var imageOnMouse;
 var fioc,sioc,tioc;
 var tempScrollAlt, tempScrollSrc;

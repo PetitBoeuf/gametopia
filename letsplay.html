@@ -11,7 +11,6 @@
 
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" defer></script> 
         <script src="js/myscript.js" defer></script>
-        <script src="js/background.js" defer></script>        
 
 
     </head>
@@ -23,10 +22,13 @@
         </header>
         
         <main>
-            <canvas id="GameCanvas"></canvas>
+            <!--<canvas id="GameCanvas"></canvas>-->
+            <div class="FalseCanvas"></div>
         </main>
 
         <footer>
+            <button class="" onclick="GetBackSettings()()">Revenir aux paramètres</button>
+            <a href="index.html"><button class="CenteredButton">Changer de jeu</button></a>
             <button class="GetRules" onclick="GetRulesInGame()">Comment jouer ? </button>
         </footer>
 

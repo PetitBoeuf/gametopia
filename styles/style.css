@@ -10,6 +10,7 @@
     /*font-weight: bold;*/
     /*overflow: hidden;*/
     /*cursor: url('assets/c1.png'), default;*/   
+    background-color: rgb(160,160,160);
 }
 html{
     font-size: 62.5%;
@@ -109,10 +110,18 @@ main.MainCopyright{
 main.MainCopyright h1{
     margin-left: 1rem;
 }
+/*
 main canvas#GameCanvas{
     position: absolute;
     height: 500px;
     width: 1000px;
+}
+*/
+main div.FalseCanvas{
+    margin: 5rem auto;
+    width: 70rem;
+    height: 40rem;
+    background-color: black;
 }
 
 
@@ -143,9 +152,11 @@ img.GameOverview{
     width: 20rem;
 }
 
+/*
 canvas#GameCanvas{
     position: absolute;
 }
+*/
 
 
 button {
@@ -189,7 +200,7 @@ footer button.PlayButton{
     left: 50%;
     transform: translateX(-50%);
 }
-footer button.CenteredSettingsButton{
+footer button.CenteredButton{
     margin : 0rem 4rem;
 }
 footer button.BackToMenuButton{    
@@ -197,5 +208,7 @@ footer button.BackToMenuButton{
     left: 50%;
     transform: translateX(-50%);
 }
-
+footer button.GetRules{
+    
+}
 
