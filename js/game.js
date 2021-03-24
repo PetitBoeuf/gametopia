@@ -1,4 +1,5 @@
-var currentCanvas, context, game;
+var currentCanvas, context, game, gameStyle;
+var gameState = "stopped";
 const PLAYER_HEIGHT = 40;
 const PLAYER_WIDTH = 4;
 window.requestAnimationFrame = window.requestAnimationFrame ||
@@ -14,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
   switch(mySessionStorage.getItem('gameName')){
     case 'Pong':
         context = currentCanvas.getContext('2d');
-      
+        mySessionStorage.getItem("Player2NN") ? gameStyle = "pvp" : gameStyle = "pvia";
         game = {
-          player: {
+          player1: {
             y: currentCanvas.height / 2 - PLAYER_HEIGHT / 2,
             score: 0
           },
-          computer: {
+          player2: {
               y: currentCanvas.height / 2 - PLAYER_HEIGHT / 2,
               score: 0
           },
@@ -48,54 +49,71 @@ document.addEventListener('DOMContentLoaded', function () {
 function Scale(num, in_min, in_max, out_min, out_max){
   return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-currentCanvas.addEventListener('mousemove', P1Moving);
-function StartPong(){
-  DrawPong();
-  PlayPong();
+currentCanvas.addEventListener('keydown', HandlePressedKey,true);
+currentCanvas.addEventListener('mousemove', P2Moving);
+currentCanvas.addEventListener('click', () => {
+  gameState = "started";
+});
+function HandlePressedKey(event){
+  if(gameStyle == "pvp") { 
+    var key = event.keyCode;
+    switch(key){
+      case 90 :  
+        game.player1.y -= 15;
+        break;
+      case 83 :         
+        game.player1.y += 15;
+        break;
+      case 27 : 
+        if (gameState == "paused") gameState = "started";
+        else gameState = "paused";        
+        break;
+    }
+  }
 }
 function PseudoIA(){
-  game.computer.y += game.ball.speed.y * 0.85;
+  game.player1.y += game.ball.speed.y * 0.50;
 }
 function BallMove() {
   if (game.ball.y > currentCanvas.height || game.ball.y < 0) {
     game.ball.speed.y *= -1;
   } 
   if (game.ball.x > currentCanvas.width - PLAYER_WIDTH - 5) {
-    Collide(game.computer);
+    Collide(game.player2);
   } else if (game.ball.x < PLAYER_WIDTH + 5) {
-    Collide(game.player);
+    Collide(game.player1);
   }
   game.ball.x += game.ball.speed.x;
   game.ball.y += game.ball.speed.y;
 }
 function Collide(player){
-  // The player does not hit the ball
+  // The player1 does not hit the ball
   if (game.ball.y < player.y || game.ball.y >= player.y + PLAYER_HEIGHT) {
-    if (player == game.player) {
-      game.computer.score++;
-      document.querySelector('#computer-score').textContent = game.computer.score;
+    if (player == game.player1) {
+      game.player2.score++;
+      document.querySelector('#player2-score').textContent = game.player2.score;
     } else {
-      game.player.score++;
-      document.querySelector('#player-score').textContent = game.player.score;
+      game.player1.score++;
+      document.querySelector('#player1-score').textContent = game.player1.score;
     }
     // Set ball and players to the center
     game.ball.x = currentCanvas.width / 2;
     game.ball.y = currentCanvas.height / 2;
-    game.player.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
-    game.computer.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
+    game.player1.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
+    game.player2.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
     
     // Reset speed
-    game.ball.speed.x = 2;
+    game.ball.speed.x = 1;
   } else {
     // Increase speed and change direction
-    game.ball.speed.x *= -1.2;
+    game.ball.speed.x *= -1.1;
     ChangeDirection(player.y);
   }
 }
-function P1Moving(event) {
+function P2Moving(event){
   var canvasLocation = currentCanvas.getBoundingClientRect();
   var mouseLocation = event.clientY - canvasLocation.y;
-  game.player.y = Scale(mouseLocation, 0, window.innerHeight, -15, currentCanvas.height + PLAYER_HEIGHT);
+  game.player2.y = Scale(mouseLocation, 0, window.innerHeight, -15, currentCanvas.height + PLAYER_HEIGHT);
 }
 function ChangeDirection(playerPosition) {
   var impact = game.ball.y - playerPosition - PLAYER_HEIGHT / 2;
@@ -104,6 +122,10 @@ function ChangeDirection(playerPosition) {
   game.ball.speed.y = Math.round(impact * ratio / 10);
 }
 
+function StartPong(){
+  DrawPong();
+  PlayPong();
+}
 function DrawPong(){
   // Draw field
   context.fillStyle = 'black';
@@ -119,8 +141,8 @@ function DrawPong(){
   
   // Draw players
   context.fillStyle = 'white';
-  context.fillRect(5, game.player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
-  context.fillRect(currentCanvas.width - PLAYER_WIDTH - 5, game.computer.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+  context.fillRect(5, game.player1.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+  context.fillRect(currentCanvas.width - PLAYER_WIDTH - 5, game.player2.y, PLAYER_WIDTH, PLAYER_HEIGHT);
   
   // Draw ball
   context.beginPath();
@@ -129,9 +151,11 @@ function DrawPong(){
   context.fill();
 }
 function PlayPong(){
-  BallMove();
-  DrawPong();
-  PseudoIA();
+  if(gameState == "started"){
+    BallMove();
+    DrawPong();
+    if(gameStyle == "pvia") PseudoIA();
+  }
   requestAnimationFrame(PlayPong);
 }
 
