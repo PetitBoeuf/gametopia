@@ -200,6 +200,20 @@ function CheckAndPlay(){
     }
 }
 
+
+var gameCanvas = document.querySelector('#GameCanvas');
+
+gameCanvas?.addEventListener('click', () => {
+    switch(mySessionStorage.getItem('gameName')){
+        case 'Pong':
+            DrawPong(gameCanvas);
+            break;
+        case 'Flappy blue Bird':
+            DrawSnake(gameCanvas);
+            break;            
+    }
+});
+
 var opposingP = document.querySelector(".OpposingDoods");
 
 if(opposingP){

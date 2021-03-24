@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
-@import url("https://fonts.googleapis.com/css?family=Lato:800");
+/*@import url("https://fonts.googleapis.com/css?family=Lato:800");*/
 *{    
     margin : 0;
     padding : 0;
@@ -110,17 +110,21 @@ main.MainCopyright{
 main.MainCopyright h1{
     margin-left: 1rem;
 }
-/*
-main canvas#GameCanvas{
-    position: absolute;
-    height: 500px;
-    width: 1000px;
+main.MainGame p{
+    font-size: 3.5rem;
+    text-align: center;
+    margin : 2rem 0rem;
+    font-weight: bold;
 }
-*/
-main div.FalseCanvas{
-    margin: 5rem auto;
-    width: 70rem;
-    height: 40rem;
+main.MainGame p>em {
+    color: rebeccapurple;
+}
+main canvas#GameCanvas{
+    display: flex;
+    justify-content: center;
+    margin: 0rem auto 4rem auto;
+    width: 130rem;
+    height: 65rem;
     background-color: black;
 }
 .OpposingDoods{

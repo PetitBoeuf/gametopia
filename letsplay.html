@@ -9,8 +9,8 @@
         <link rel="stylesheet" href="styles/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="assets/c7.png" />
 
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js" defer></script> 
         <script src="js/myscript.js" defer></script>
+        <script src="js/game.js" defer></script>
 
 
     </head>
@@ -22,9 +22,9 @@
             <p class="OpposingDoods">Joueur 1 oppose Joueur 2</p>
         </header>
         
-        <main>
-            <!--<canvas id="GameCanvas"></canvas>-->
-            <div class="FalseCanvas"></div>
+        <main class="MainGame">
+            <p>Joueur 1 : <em id="player-score">0</em> - <em id="computer-score">0</em> : Joueur 2 </p>
+            <canvas id="GameCanvas"></canvas>         
         </main>
 
         <footer>
