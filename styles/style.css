@@ -123,8 +123,6 @@ main canvas#GameCanvas{
     display: flex;
     justify-content: center;
     margin: 0rem auto 4rem auto;
-    width: 130rem;
-    height: 65rem;
     background-color: black;
 }
 .OpposingDoods{
@@ -155,7 +153,7 @@ div.PNameDiv{
 div.PNameDiv input{
     margin: -1rem 1.5rem;
 }
-div.SecondPlayerDiv{
+div.FirstPlayerDiv{
     display: none;
 }
 img.GameOverview{

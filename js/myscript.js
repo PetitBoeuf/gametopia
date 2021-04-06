@@ -1,7 +1,7 @@
 var imageOnMouse;
 var fioc,sioc,tioc;
 var tempScrollAlt, tempScrollSrc;
-var games = ["Avion Piou Piou", "Flappy blue Bird", "Pong"], indexGame = 1, nbGames = 3; 
+var games = ["Avion Piou Piou", "Snake", "Pong"], indexGame = 1, nbGames = 3; 
 var p1button, p2button, backbutton, rulesButton;
 var buttonText, buttonAttribute;
 var mySessionStorage = window.sessionStorage;
@@ -103,13 +103,16 @@ if(document.querySelector(".MainRulesTitle")) document.querySelector(".MainRules
 
 
 var PlayersButtons = document.querySelectorAll(".GameMode");
-var scdPDiv = document.querySelector(".SecondPlayerDiv");
+var frstPDiv = document.querySelector(".FirstPlayerDiv");
 var StartButton = document.querySelector(".StartGameButton");
+var nickNameBlock = document.querySelector(".NickNameBlock");
 
 PlayersButtons[0]?.addEventListener('click', () => {
-    PlayersButtons[0].innerHTML = "<b>Joueur contre Ordinateur</b>";
-    PlayersButtons[1].innerHTML = "Joueur contre Joueur";
-    scdPDiv.style.display="none";
+    nickNameBlock.style.display ="flex";
+
+    PlayersButtons[0].innerHTML = "<b>Ordinateur contre Joueur 2</b>";
+    PlayersButtons[1].innerHTML = "Joueur1 contre Joueur2";
+    frstPDiv.style.display="none";
     StartButton.style.display = "block";
     StartButton.classList.add("ReadyToStart");
     mySessionStorage.setItem('Player2NN',"");
@@ -117,11 +120,12 @@ PlayersButtons[0]?.addEventListener('click', () => {
 });
 
 PlayersButtons[1]?.addEventListener('click', () => {
+    nickNameBlock.style.display ="flex";
     StartButton.style.display = "block";
     StartButton.classList.add("ReadyToStart");
-    PlayersButtons[0].innerHTML = "Joueur contre Ordinateur";
-    PlayersButtons[1].innerHTML = "<b>Joueur contre Joueur</b>";
-    scdPDiv.style.display="flex";
+    PlayersButtons[0].innerHTML = "Ordinateur contre Joueur 2";
+    PlayersButtons[1].innerHTML = "<b>Joueur1 contre Joueur2</b>";
+    frstPDiv.style.display="flex";
 });
 
 
@@ -188,10 +192,9 @@ P2name?.addEventListener('input', () => {
 
 
 function CheckAndPlay(){
-    
     if (P1name.value == "") PErrorTags[0].style.display = "block";
     if (P2name.value == "") PErrorTags[1].style.display = "block";    
-    if (((P1name.value != "") && (scdPDiv.style.display == "none")) || ((P1name.value !="" ) && (P2name.value !="" ))){
+    if (((P2name.value != "") && (frstPDiv.style.display == "none")) || ((P1name.value !="" ) && (P2name.value !="" ))){
 
         mySessionStorage.setItem('Player1NN',document.querySelector(".P1Name").value);
         mySessionStorage.setItem('Player2NN',document.querySelector(".P2Name").value);
@@ -201,7 +204,7 @@ function CheckAndPlay(){
 }
 
 
-var gameCanvas = document.querySelector('#GameCanvas');
+/* var gameCanvas = document.querySelector('#GameCanvas');
 
 gameCanvas?.addEventListener('click', () => {
     switch(mySessionStorage.getItem('gameName')){
@@ -212,12 +215,12 @@ gameCanvas?.addEventListener('click', () => {
             DrawSnake(gameCanvas);
             break;            
     }
-});
+}); */
 
 var opposingP = document.querySelector(".OpposingDoods");
 
 if(opposingP){
-    mySessionStorage.getItem('Player2NN') ? opposingP.innerHTML = mySessionStorage.getItem('Player1NN') + " (J1) oppose " + mySessionStorage.getItem('Player2NN') + " (J2)!" : opposingP.innerHTML = mySessionStorage.getItem('Player1NN') + " (J1) oppose l'Ordinateur !";
+    mySessionStorage.getItem('Player1NN') ? opposingP.innerHTML = mySessionStorage.getItem('Player1NN') + " (J1) oppose " + mySessionStorage.getItem('Player2NN') + " (J2)!" : opposingP.innerHTML =  "L'Ordinateur oppose (J2) " + mySessionStorage.getItem('Player2NN') + "!";
 } 
 
 
