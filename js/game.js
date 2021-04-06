@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     p1name.innerHTML = "Ordinateur";
     p2name.innerHTML = mySessionStorage.getItem('Player2NN');
   }
-  
+  document.querySelector(".MainGameTitle").innerHTML = "Voici le jeu du " + mySessionStorage.getItem('gameName');
   context = currentCanvas.getContext('2d');
   mySessionStorage.getItem("Player1NN") ? gameStyle = "pvp" : gameStyle = "pvia";
 
@@ -420,7 +420,7 @@ function PlaySnake(){
 
 
 function gameOver(){
-  console.log("oupsi");
+  location.reload();
 }
 
 function moveIASnake(){

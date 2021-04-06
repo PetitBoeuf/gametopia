@@ -65,15 +65,15 @@ div.ImageCarroussel{
     align-items: center;
     
 }
-div.ImageCarroussel img.fioc, img.tioc{
+div.ImageCarroussel img.fioc, img.sioc{
     height: 15rem;
     width : 20rem;
 }
-div.ImageCarroussel img.sioc{
+/* div.ImageCarroussel img.sioc{
     margin: 3rem 5rem;
     height: 30rem;
     width: 50rem;
-}
+} */
     
 div.ImageCarroussel img.leftarrow,img.rightarrow{
     margin: 1rem;
@@ -90,24 +90,38 @@ div.ImageCarroussel img.rightarrow{
 }
 
 
-/* fioc first image of carroussel, tioc third...*/
-div.ImageCarroussel img.fioc, img.tioc{
+div.ImageCarroussel img.fioc, img.sioc{
+    margin : 3rem;
+    width : 700px;    
+    height : 500px;   
     opacity: 0.3;
+}
+div.ImageCarroussel img.chosenOne{
+    opacity: 1;
+    border: 10px solid rebeccapurple;
 }
 
 div.CopyrightBlock p{
+    text-align: left    ;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 2.5rem;
+}
+div.RulesBlock p {
+    text-align: left;
+    font-weight: bold;
     font-size: 1.5rem;
     margin: 2.5rem;
 }
 
 
-main.MainCopyright{
+main.MainCopyright, main.MainRules{
     display: flex;
     justify-content: center;
     width: 100%; 
     margin-top: 7rem; 
 }
-main.MainCopyright h1{
+main.MainCopyright h1, main.MainRules h1{
     margin-left: 1rem;
 }
 main.MainGame p{
@@ -156,10 +170,6 @@ div.PNameDiv input{
 div.FirstPlayerDiv{
     display: none;
 }
-img.GameOverview{
-    height: 15rem;
-    width: 20rem;
-}
 
 span.ErrorTag{
     display: none;
@@ -173,11 +183,6 @@ button.StartGameButton{
 }
 
 
-/*
-canvas#GameCanvas{
-    position: absolute;
-}
-*/
 
 
 button {
