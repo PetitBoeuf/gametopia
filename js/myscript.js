@@ -6,24 +6,31 @@ var p1button, p2button, backbutton, rulesButton;
 var buttonText, buttonAttribute;
 var mySessionStorage = window.sessionStorage;
 
+
+//ImageOnMouse représente l'image selectionnée pour effectuer l'animation lors du choix du jeu. 
+//Il y a une vérification car, possédant la même classe, il faut distinguer l'image de choix de jeu à l'aperçu de jeu dans le paramétrage du jeu.
 imageOnMouse = document.querySelector('.chosenOne');
 document.querySelector(".chosenOne") == null ? imageOnMouse = document.querySelector(".GameOverview") : imageOnMouse = document.querySelector(".chosenOne");
 
+//Ajout d'un évènement pour entrée de souris et dégagement de souris.
 imageOnMouse?.addEventListener("mouseover", AnimateMe);
 imageOnMouse?.addEventListener("mouseout", DeanimateMe);
 
 function AnimateMe(){
+    //Inversion des attributs alt et src pour obtenir le gif
     let tempSrc = imageOnMouse.src;
     imageOnMouse.src = imageOnMouse.alt;
     imageOnMouse.alt = tempSrc;
 }
 
 function DeanimateMe(){
+    //Inversion des attributs alt et src pour obtenir l'image
     let tempAlt = imageOnMouse.alt;
     imageOnMouse.alt = imageOnMouse.src;
     imageOnMouse.src = tempAlt;
 }
 
+//fonction s'activant dès lors que l'on clique sur une flèche pour naviguer dans le menu des jeux
 function Scroll(){
     fioc = document.querySelector(".fioc");
     sioc = document.querySelector(".sioc");
@@ -34,34 +41,12 @@ function Scroll(){
     imageOnMouse.addEventListener("mouseover", AnimateMe);
     imageOnMouse.addEventListener("mouseout", DeanimateMe);
 
+    //Incrémentation du compteur et retour à 0 en cas de besoin afin de savoir sur quel jeu nous sommes
     indexGame + 1 == nbGames ? indexGame = 0 : indexGame += 1;  
 }
 
-function ScrollRight(){
-    // fioc = document.querySelector(".fioc");
-    // sioc = document.querySelector(".sioc");
-    // tioc = document.querySelector(".tioc");
-    // tempScrollSrc = fioc.src;  tempScrollAlt = fioc.alt;              
-    // fioc.src = sioc.src;  fioc.alt = sioc.alt;   
-    // sioc.src = tioc.src;  sioc.alt = tioc.alt;   
-    // tioc.src = tempScrollSrc;  tioc.alt = tempScrollAlt;   
-
-    // indexGame + 1 == nbGames ? indexGame = 0 : indexGame += 1;   
-}
-
-function ScrollLeft(){
-    // fioc = document.querySelector(".fioc");
-    // sioc = document.querySelector(".sioc");
-    // tioc = document.querySelector(".tioc");
-    // tempScrollSrc = tioc.src;  tempScrollAlt = tioc.alt;              
-    // tioc.src = sioc.src;  tioc.alt = sioc.alt;   
-    // sioc.src = fioc.src;  sioc.alt = fioc.alt;   
-    // fioc.src = tempScrollSrc;  fioc.alt = tempScrollAlt; 
-
-    // indexGame - 1 < 0 ? indexGame = nbGames - 1 : indexGame -= 1;
-}
-
 function SelectGame(){
+    //Ajout des attributs dans la session du navigateur, dans celle ci nous enregistrerons le nom du jeu et les images du jeu sélectionné pour l'aperçu de jeu et nous passerons a la page de paramétrage.
    mySessionStorage.setItem('gameName',games[indexGame]);
    mySessionStorage.setItem('gameSrc', document.querySelector(".chosenOne").src);
    mySessionStorage.setItem('gameAlt', document.querySelector(".chosenOne").alt);
@@ -69,6 +54,8 @@ function SelectGame(){
    if (mySessionStorage.getItem('P2Name')) mySessionStorage.removeItem('P2Name');
    window.location.href = "settings.html";
 }
+
+//Si nous sommes déjà dans la page de paramétrage, nous mettons à jour les données pour qu'elles correspondent au jeu sélectionné.
 if (window.location.toString().includes("settings.html")){
     document.querySelector(".PageTitle").innerHTML = "Paramétrage du " + mySessionStorage.getItem('gameName');
     document.querySelector(".GameOverview").src = mySessionStorage.getItem('gameSrc');
@@ -76,7 +63,7 @@ if (window.location.toString().includes("settings.html")){
     document.querySelector(".GameName").innerHTML = mySessionStorage.getItem("gameName");
 }
 
-
+//Ce fonctionnement est un changement dynamique de texte et de cible d'un bouton qui est dans la même page. Il gère donc l'écriture qu'il y a dessus ainsi que la cible en fonction de là où l'utilisateur était avant.
 rulesButton = document.querySelector(".GetBackButton");    
 var searchValue = new URLSearchParams(window.location.search)
 var getValue = searchValue.get('path');
@@ -91,11 +78,18 @@ switch(getValue){
         rulesButton.innerHTML = "Revenir au jeu";
         rulesButton.setAttribute("onclick","javascript: GetBackInGame()");
         break;
-    
+        
     default:
         //console.log("You came here without clicking a button, you've created such a mess.");
 }
+        
+function GetRulesPreGame(){
+    window.location.href = "rules.html?path=settings";        
+}
 
+function GetRulesInGame(){
+    window.location.href = "rules.html?path=ingame";
+}
 function GetBackSettings(){        
     window.location = "settings.html";
 }
@@ -103,22 +97,14 @@ function GetBackInGame(){
     window.location = "letsplay.html";
 }
 
-var P1name = document.querySelector(".P1Name");
-var P2name = document.querySelector(".P2Name");
-var PErrorTags = document.querySelectorAll(".ErrorTag");
 
-P1name?.addEventListener('input', () => {
-    PErrorTags[0].style.display ="none";
-});
-P2name?.addEventListener('input', () => {
-    PErrorTags[1].style.display ="none";
-});
-
+//Actualisation des textes dans l'écran de jeu et l'écran de règles du moment où l'on y est. Les données étant stockées dans la session il est simple de les recupérer.
 if (document.querySelector(".MainGameTitle")) document.querySelector(".MainGameTitle").innerHTML = "Voici le jeu du " + mySessionStorage.getItem('gameName');
 
 if(document.querySelector(".MainRulesTitle")) document.querySelector(".MainRulesTitle").innerHTML = "Voici les règles et les commandes du " + mySessionStorage.getItem('gameName');
 
-
+//Cette partie est en fait la sélection du type de partie. au départ, il faut forcément en sélectionner une pour que le bouton pour jouer apparaisse.
+//En fonction de la sélection, du style est appliqué et les zones de texte pour les pseudo apparaissent également.
 var PlayersButtons = document.querySelectorAll(".GameMode");
 var frstPDiv = document.querySelector(".FirstPlayerDiv");
 var StartButton = document.querySelector(".StartGameButton");
@@ -145,57 +131,7 @@ PlayersButtons[1]?.addEventListener('click', () => {
     frstPDiv.style.display="flex";
 });
 
-
-function GetRulesPreGame(){
-    window.location.href = "rules.html?path=settings";        
-    /*
-    document.cookie = "buttonText=Revenir aux paramètres";
-    document.cookie = "buttonAttribute=GetBackSettings()";
-    */
-}
-
-function GetRulesInGame(){
-    /*
-    document.cookie = "buttonText=Revenir à la partie en cours";
-    document.cookie="buttonAttribute=GetBackInGame()";
-    */
-    window.location.href = "rules.html?path=ingame";
-}
-
-/*
-buttonText = document.cookie.split(";")[0].split("=")[1];
-buttonAttribute = document.cookie.split(";")[1].split("=")[1];
-rulesButton = document.querySelector(".GetBackButton");
-rulesButton.innerHTML = buttonText;
-rulesButton.setAttribute("onclick","javascript: " + buttonAttribute);
-*/
-
-rulesButton = document.querySelector(".GetBackButton");    
-var searchValue = new URLSearchParams(window.location.search)
-var getValue = searchValue.get('path');
-
-switch(getValue){
-    case "settings":
-        rulesButton.innerHTML = "Revenir aux paramètres";
-        rulesButton.setAttribute("onclick","javascript: GetBackSettings()");
-        break;
-
-    case "ingame":            
-        rulesButton.innerHTML = "Revenir au jeu";
-        rulesButton.setAttribute("onclick","javascript: GetBackInGame()");
-        break;
-    
-    default:
-        //console.log("You came here without clicking a button, you've created such a mess.");
-}
-
-function GetBackSettings(){        
-    window.location = "settings.html";
-}
-function GetBackInGame(){
-    window.location = "letsplay.html";
-}
-
+//Cette partie gère le côté vide ou non des zones de texte. En effet, si celles ci sont déjà vides et les messages d'erreurs sont affichés, alors les messages disparaissent dès lors qu'un pseudo est entré. 
 var P1name = document.querySelector(".P1Name");
 var P2name = document.querySelector(".P2Name");
 var PErrorTags = document.querySelectorAll(".ErrorTag");
@@ -208,6 +144,9 @@ P2name?.addEventListener('input', () => {
 });
 
 
+//Cette fonction est lancée lorsque l'on appuie sur le bouton de jouer au jeu après avoir effectué les paramétrages nécessaires. 
+//Cette partie gère les zones d'insertion de texte vides.
+//Si une zone est vide, on affiche les messages d'erreurs qui, de base, sont cachés.
 function CheckAndPlay(){
     if (P1name.value == "") PErrorTags[0].style.display = "block";
     if (P2name.value == "") PErrorTags[1].style.display = "block";    
@@ -220,11 +159,16 @@ function CheckAndPlay(){
     }
 }
 
+//Cette  partie gère l'écriture des pseudos  dans l'écran de jeu, en récupérant d'abord l'élément HTML qu'il faut modifier.
+//L'écriture de pseudos se fait en fonction des noms insérés dans le stockage, le Joueur 2 est toujours présent mais le joueur 1 est remplacé par l'ordinateur si le nom est vidé.
 var opposingP = document.querySelector(".OpposingDoods");
 
 if(opposingP){
     mySessionStorage.getItem('Player1NN') ? opposingP.innerHTML = mySessionStorage.getItem('Player1NN') + " (J1) oppose " + mySessionStorage.getItem('Player2NN') + " (J2)!" : opposingP.innerHTML =  "L'Ordinateur oppose (J2) " + mySessionStorage.getItem('Player2NN') + "!";
 } 
+
+
+//Cette partie finalement gère de manière dynamique ce que la page unique de règles et de commandes doit afficher. Il est impossible de le mettre directement sur le document html de la page puisqu'il ne s'agit que d'une page donc les différents jeux ne pourraient pas y être expliqués.
 var  commandsBlock = document.querySelectorAll(".RulesBlockP")[0]
 var  rulesBlock = document.querySelectorAll(".RulesBlockP")[1]
 

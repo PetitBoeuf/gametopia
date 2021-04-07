@@ -1,3 +1,14 @@
+/*
+CE FICHIER FAIT OFFICE DE CODE BACKEND POUR LE FONCTIONNEMENT DES DEUX JEUX, LE SNAKE ET LE PONG. 
+CEPENDANT, MIS A PART LA PARTIE DEUX JOUEURS DES DEUX JEUX, TOUS LES JEUX ONT ETE REPRIS D INTERNET SUITE AUX INSTRUCTEURS DE NOTRE PROFFESSEURE REFERENTE. 
+AINSI, TOUS LES CREDITS SONT DONC POUR : 
+"https://blog.devoreve.com/2018/06/06/creer-un-pong-en-javascript/" POUR LE PONG 
+"https://www.educative.io/blog/javascript-snake-game-tutorial" POUR LE SNAKE
+ON LES REMERCIE GRANDEMENT POUR LEUR AIDE INDUBITABLE ET LEURS EXPLICATIONS CLAIRES ET PRECISES.
+
+JORDA Marco et DEMAREST Alexis.
+*/
+
 var currentCanvas, context, gameData, gameStyle;
 var gameState = "stopped";
 
@@ -10,7 +21,6 @@ const board_border = 'black';
 const board_background = "white";
 const snake_border = 'dark';
 
-// True if changing direction
 let changing_direction = false;
 
 let food_x;
@@ -35,6 +45,7 @@ currentCanvas = document.querySelector("#GameCanvas");
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  //Cette partie sert de mise à jour des éléments html en fonction du jeu sélectionné et en fonction des pseudos et du type de jeu.
   var p1name = document.querySelector(".p1name");
   var p2name = document.querySelector(".p2name");
 
@@ -51,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   switch(mySessionStorage.getItem('gameName')){
     case 'Pong':
+        //Mise en place des données pour le jeu PONG et lancement du jeu.
         gameData = {
           player1: {
             y: currentCanvas.height / 2 - PLAYER_HEIGHT / 2,
@@ -73,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         StartPong();
         break;
     case 'Snake':      
+        //Mise en place des données pour le jeu SNAKE et lancement du jeu.
         gameData = {
           player1: {
             snake: [
@@ -228,64 +241,13 @@ function HandlePressedKey(event){
   }
 }
 
-
-function PseudoIA(){
-  gameData.player1.y += gameData.ball.speed.y * 0.4;
-}
-function BallMoves() {
-  if (gameData.ball.y > currentCanvas.height || gameData.ball.y < 0) {
-    gameData.ball.speed.y *= -1;
-  } 
-  if (gameData.ball.x > currentCanvas.width - PLAYER_WIDTH -10) {
-    Collide(gameData.player2);
-  } else if (gameData.ball.x < PLAYER_WIDTH + 10) {
-    Collide(gameData.player1);
-  }
-  gameData.ball.x += gameData.ball.speed.x;
-  gameData.ball.y += gameData.ball.speed.y;
-}
-function Collide(player){
-  // The player1 does not hit the ball
-  if (gameData.ball.y < player.y || gameData.ball.y >= player.y + PLAYER_HEIGHT) {
-    if (player == gameData.player1) {
-      gameData.player2.score++;
-      document.querySelector('#player2-score').textContent = gameData.player2.score;
-    } else {
-      gameData.player1.score++;
-      document.querySelector('#player1-score').textContent = gameData.player1.score;
-    }
-    // Set ball and players to the center
-    gameData.ball.x = currentCanvas.width / 2;
-    gameData.ball.y = currentCanvas.height / 2;
-    gameData.player1.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
-    gameData.player2.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
-    
-    // Reset speed
-    gameData.ball.speed.x = 1;
-  } else {
-    // Increase speed and change direction
-    gameData.ball.speed.x *= -1.1;
-    ChangeDirection(player.y);
-  }
-}
-function P2Moving(event){
-  if(mySessionStorage.getItem('gameName') == 'Pong'){
-    var canvasLocation = currentCanvas.getBoundingClientRect();
-    var mouseLocation = event.clientY - canvasLocation.y;
-    gameData.player2.y = Scale(mouseLocation, 0, window.innerHeight, -15, currentCanvas.height + PLAYER_HEIGHT);
-  }
-  }
-function ChangeDirection(playerPosition) {
-  var impact = gameData.ball.y - playerPosition - PLAYER_HEIGHT / 2;
-  var ratio = 100 / (PLAYER_HEIGHT / 2);
-  // Get a value between 0 and 10
-  gameData.ball.speed.y = Math.round(impact * ratio / 10);
-}
-
+//FONCTIONS POUR LE PONG 
+//FONCTION DE LANCEMENT DU PONG 
 function StartPong(){
   DrawPong();
   PlayPong();
 }
+//FONCTION DE DESSIN DU PONG 
 function DrawPong(){
   // Draw field
   context.fillStyle = 'black';
@@ -310,6 +272,7 @@ function DrawPong(){
   context.arc(gameData.ball.x, gameData.ball.y, gameData.ball.r, 0, Math.PI * 2, false);
   context.fill();
 }
+// FONCTION D ITERATION DU PONG, CETTE FONCTION EST RAPPELLEE POUR FAIRE LA BOUCLE D ANIMATION DU JEU
 function PlayPong(){
   if(gameState == "started"){
     BallMoves();
@@ -318,12 +281,101 @@ function PlayPong(){
   }
   requestAnimationFrame(PlayPong);
 }
+//FONCTION DE DEPLACEMENT DE LA BALLE
+function BallMoves() {
+  //Hits the bottom wall
+  if (gameData.ball.y > currentCanvas.height || gameData.ball.y < 0) {
+    gameData.ball.speed.y *= -1;
+  } 
+  //Hits a player, calls the collide function 
+  if (gameData.ball.x > currentCanvas.width - PLAYER_WIDTH -10) {
+    Collide(gameData.player2);
+  } else if (gameData.ball.x < PLAYER_WIDTH + 10) {
+    Collide(gameData.player1);
+  }
+  //We keep moving the ball
+  gameData.ball.x += gameData.ball.speed.x;
+  gameData.ball.y += gameData.ball.speed.y;
+}
+//FONCTION DE DEPLACEMENT DE L ORDINATEUR EN FONCTION DE LA BALLE ET SA VITESSE POUR NE PAS RENDRE LA PARTIE IMPOSSIBLE
+function PseudoIA(){
+  gameData.player1.y += gameData.ball.speed.y * 0.6;
+}
+//FONCTION DE GESTION DE COLLISION EN FONCTION DU JOUEUR PASSE EN PARAMETRE
+function Collide(player){
+  // The player1 does not hit the ball
+  if (gameData.ball.y < player.y || gameData.ball.y >= player.y + PLAYER_HEIGHT) {
+    if (player == gameData.player1) {
+      gameData.player2.score++;
+      document.querySelector('#player2-score').textContent = gameData.player2.score;
+    } else {
+      gameData.player1.score++;
+      document.querySelector('#player1-score').textContent = gameData.player1.score;
+    }
+    // Set ball and players to the center
+    gameData.ball.x = currentCanvas.width / 2;
+    gameData.ball.y = currentCanvas.height / 2;
+    gameData.player1.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
+    gameData.player2.y = currentCanvas.height / 2 - PLAYER_HEIGHT / 2;
+    
+    // Reset speed
+    gameData.ball.speed.x = 1;
+  } else {
+    // Increase speed and change direction
+    gameData.ball.speed.x *= -1.1;
+    ChangeDirection(player.y);
+  }
+}
+//FONCTION D EVENEMENT LANCE DES QUE LA SOURIS SE DEPLACE ET QUI GERE DONC LE DEPLACEMENT DE LA BARRE DANS LE CANVAS EN FONCTION DU DEPLACEMENT DE LA SOURIS
+function P2Moving(event){
+  if(mySessionStorage.getItem('gameName') == 'Pong'){
+    var canvasLocation = currentCanvas.getBoundingClientRect();
+    var mouseLocation = event.clientY - canvasLocation.y;
+    gameData.player2.y = Scale(mouseLocation, 0, window.innerHeight, -15, currentCanvas.height + PLAYER_HEIGHT);
+  }
+}
+//FONCTION QUI FAIT CHANGER LA DIRECTION A LA BALLE LORSQUE L ON FAIT UNE COLLISION AVEC UN JOUEUR
+function ChangeDirection(playerPosition) {
+  var impact = gameData.ball.y - playerPosition - PLAYER_HEIGHT / 2;
+  var ratio = 100 / (PLAYER_HEIGHT / 2);
+  // Get a value between 0 and 10 
+  gameData.ball.speed.y = Math.round(impact * ratio / 10);
+}
 
+
+
+//FONCTION DE DEPART DU JEU SNAKE
 function StartSnake(){
   iaSnakeCounter = 0;
   drawSnakeCanvas();
   gen_food();
   PlaySnake();
+}
+
+//FONCTION D ITERATION DU JEU DE SNAKE
+//PRECISIONS : LE JEU SE LANCE UNIQUEMENT SI LE STATUT DE JEU EST "started" ET L IA DU SNAKE ORDINATEUR CHANGE DE DIRECTION 5 FOIS MOINS VITE QUE LA POSSIBILITE DE CHANGER DE DIRECTION. 
+// LE SET TIMEOUT EST ICI POUR RAPPELER LA FONCTION TOUS LES 100 MS.
+
+function PlaySnake(){  
+  if(gameState == "started"){
+    if (hasGameEnded()) {
+      gameOver();
+      return;
+    }
+    iaSnakeCounter+=100;
+    
+    changing_direction = false;
+    
+    setTimeout(function onTick() {
+      drawSnakeCanvas();    
+      drawFood();
+      moveSnakes();  
+      if(gameStyle == "pvia") moveIASnake();
+      drawSnake();
+      // Call PlaySnake again
+      PlaySnake();
+    }, 100)
+  }
 }
 
 // draw a border around the canvas
@@ -358,7 +410,7 @@ function drawSnakePart(player) {
     context.strokeRect(snakePart.x, snakePart.y, 20, 20);
   }
 }
-
+//CETTE FONCTION PROVOQUE LE DEPLACEMENT DU SNAKE DANS SA DIRECTION, ET SI UNE POMME EST MANGEE, AU LIEU DE RAJOUTER UNE DISTANCE AU SNAKE ON OMMET UNE FOIS LE DEPLACEMENT DU SNAKE POUR LE "RALLONGER" PUIS ON ACTUALISE LA NOUVELLE TETE EN GENERANT EGALEMENT UNE NOUVELLE POMME
 function moveSnakes() 
 {    
   let newHead = {x: gameData.player1.snake[0].x + gameData.player1.dx, y: gameData.player1.snake[0].y + gameData.player1.dy}
@@ -397,32 +449,11 @@ function moveSnakes()
   }
 }
 
-
-function PlaySnake(){  
-  if (hasGameEnded()) {
-    gameOver();
-    return;
-  }
-  iaSnakeCounter+=100;
-
-  changing_direction = false;
-
-  setTimeout(function onTick() {
-    drawSnakeCanvas();    
-    drawFood();
-    moveSnakes();  
-    if(gameStyle == "pvia") moveIASnake();
-    drawSnake();
-    // Call PlaySnake again
-    PlaySnake();
-  }, 100)
-}
-
-
+//FONCTION POUR RECHARGER LA PAGE UNE FOIS LA PARTIE TERMINEE 
 function gameOver(){
   location.reload();
 }
-
+//FONCTION POUR DEPLACER LE SNAKE DE L ORDINATEUR QUI CONSISTE A PRENDRE UNE DIRECTION QUASIMENT AU HASARD AFIN DE NE PAS RENDRE LE SNAKE TROP DIFFICILE
 function moveIASnake(){
   if(iaSnakeCounter == 500){
     iaSnakeCounter = 0;
@@ -435,14 +466,14 @@ function moveIASnake(){
     gameData.player1.dy = directions[directionIndex]["dy"];
   }
 }
-
+//FONCTION QUI DESSINE LA POMME
 function drawFood() {
   context.fillStyle = 'red';
   context.strokestyle = 'lightred';
   context.fillRect(food_x, food_y, 20, 20);
   context.strokeRect(food_x, food_y, 20, 20);
 }
-
+//FONCTION QUI GENERE DES COORDONNEES AU HASARD POUR LA PROCHAINE POMME
 function random_food(min, max) {
   let food = Math.round((Math.random() * (max-min) + min) / 10) * 10;
   while (food % 20 != 0){
@@ -450,7 +481,7 @@ function random_food(min, max) {
   }  
   return food
 }
-
+//FONCTION QUI GENERE LA POMME ET QUI VERIFIE QU ELLE N A PAS ETE GENEREE EN PLEIN DANS UN JOUEUR
 function gen_food() {
   // Generate a random number the food x-coordinate
   food_x = random_food(0, currentCanvas.width - 10);
@@ -468,13 +499,14 @@ function gen_food() {
   });
 }
 
+//FONCTION VERIFIANT SI LA PARTIE EST TERMINEE OU NON 
 function hasGameEnded() {
   const p1Check = didItHitSmth(gameData.player1.snake, gameData.player1.snakeHead, gameData.player2.snake)
   const p2Check = didItHitSmth(gameData.player2.snake, gameData.player2.snakeHead, gameData.player1.snake)
 
   return p1Check || p2Check;
 }
-
+//FONCTION VERIFIANT SI LE SNAKE PASSE EN PARAMETRE A EU UNE COLLISION AVEC QUELQUE CHOSE 
 function didItHitSmth(snake, snakesHead, otherPSnake){
     //hit itself
     for (let i = 3; i < snake.length; i++) {
